@@ -1,0 +1,19 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Maven y archivos compilados
+target/
+out/
+build/
+*.class
+
+# Archivos temporales
+*.log
+.DS_Store
+Thumbs.db
+
+# Información privada
+.env
