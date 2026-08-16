@@ -3,6 +3,7 @@ package org.vallegrande.edu.pe.app;
 import org.vallegrande.edu.pe.controller.BibliotecaController;
 import org.vallegrande.edu.pe.model.Libro;
 import org.vallegrande.edu.pe.model.Sede;
+import org.vallegrande.edu.pe.model.Autor;
 import org.vallegrande.edu.pe.view.BibliotecaView;
 
 import java.util.Scanner;
@@ -41,14 +42,22 @@ public class Main {
                     int anio = scanner.nextInt();
                     scanner.nextLine();
 
-                    // Validar datos del libro
-                    if (id <= 0 || titulo.isEmpty()
-                            || autor.isEmpty() || anio <= 0) {
+                    // Validar los datos del libro
+                    if (id <= 0
+                            || titulo.trim().isEmpty()
+                            || autor.trim().isEmpty()
+                            || anio <= 0) {
 
-                        System.out.println("Datos no válidos");
+                        System.out.println("Datos del libro no válidos");
 
                     } else {
-                        Libro libro = new Libro(id, titulo, autor, anio);
+                        Libro libro = new Libro(
+                                id,
+                                titulo,
+                                autor,
+                                anio
+                        );
+
                         controller.agregarLibro(libro);
                     }
 
@@ -62,7 +71,13 @@ public class Main {
                 case 3: {
                     System.out.print("Ingrese título o autor: ");
                     String criterio = scanner.nextLine();
-                    controller.buscarLibro(criterio);
+
+                    if (criterio.trim().isEmpty()) {
+                        System.out.println("Debe ingresar un criterio");
+                    } else {
+                        controller.buscarLibro(criterio);
+                    }
+
                     break;
                 }
 
@@ -79,9 +94,10 @@ public class Main {
                     System.out.print("Dirección: ");
                     String direccionSede = scanner.nextLine();
 
-                    // Validar datos de la sede
-                    if (idSede <= 0 || nombreSede.isEmpty()
-                            || direccionSede.isEmpty()) {
+                    // Validar los datos de la sede
+                    if (idSede <= 0
+                            || nombreSede.trim().isEmpty()
+                            || direccionSede.trim().isEmpty()) {
 
                         System.out.println("Datos de la sede no válidos");
 
@@ -102,7 +118,37 @@ public class Main {
                     controller.listarSedes();
                     break;
 
-                case 6:
+                case 6: {
+                    System.out.println("\n--- REGISTRAR AUTOR ---");
+
+                    System.out.print("ID: ");
+                    int idAutor = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.print("Nombre: ");
+                    String nombreAutor = scanner.nextLine();
+
+                    // Validación solicitada en el reto:
+                    // no registrar autores sin nombre
+                    if (idAutor <= 0 || nombreAutor.trim().isEmpty()) {
+                        System.out.println("Datos del autor no válidos");
+                    } else {
+                        Autor nuevoAutor = new Autor(
+                                idAutor,
+                                nombreAutor
+                        );
+
+                        controller.agregarAutor(nuevoAutor);
+                    }
+
+                    break;
+                }
+
+                case 7:
+                    controller.listarAutores();
+                    break;
+
+                case 8:
                     System.out.println("Hasta luego.");
                     break;
 
@@ -110,7 +156,7 @@ public class Main {
                     System.out.println("Opción no válida");
             }
 
-        } while (opcion != 6);
+        } while (opcion != 8);
 
         scanner.close();
     }

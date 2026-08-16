@@ -15,7 +15,9 @@ public class BibliotecaView {
         System.out.println("3. Buscar libro");
         System.out.println("4. Registrar sede");
         System.out.println("5. Listar sedes");
-        System.out.println("6. Salir");
+        System.out.println("6. Registrar autor");
+        System.out.println("7. Listar autores");
+        System.out.println("8. Salir");
         System.out.print("Seleccione una opción: ");
     }
     //MENSAJE
