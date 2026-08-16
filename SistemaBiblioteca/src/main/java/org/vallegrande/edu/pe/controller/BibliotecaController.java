@@ -1,19 +1,19 @@
 package org.vallegrande.edu.pe.controller;
-
 import org.vallegrande.edu.pe.model.Libro;
-
-import java.awt.*;
+import org.vallegrande.edu.pe.model.Sede;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class BibliotecaController {
 
     //Lista donden almacenaremos nuestros libros
     private ArrayList<Libro> libros;
 
+    private ArrayList<Sede> sedes;
+
     //Constructor
-    public BibliotecaController(){
+    public BibliotecaController() {
         libros = new ArrayList<>();
+        sedes = new ArrayList<>();
     }
 
     //Registrar
@@ -48,5 +48,23 @@ public class BibliotecaController {
             System.out.println("No se encontro ningun libro");
         }
     }
+    // Registrar sede
+    public void agregarSede(Sede sede) {
+        sedes.add(sede);
+        System.out.println("Sede registrada correctamente");
+    }
 
+    // Listar sedes
+    public void listarSedes() {
+        if (sedes.isEmpty()) {
+            System.out.println("No hay sedes registradas");
+            return;
+        }
+
+        System.out.println("LISTA DE SEDES");
+
+        for (Sede sede : sedes) {
+            sede.mostrarSede();
+        }
+    }
 }

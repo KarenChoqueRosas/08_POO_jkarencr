@@ -8,12 +8,15 @@ public class BibliotecaView {
         System.out.println("=================");
     }
     //MENU
-    public void mostrarMenu(){
-        System.out.println("1. Registrar Libro");
-        System.out.println("2. Listar Libro");
-        System.out.println("3. Buscar Libro");
-        System.out.println("4. Salir");
-        System.out.println("Seleccione una opcion");
+    public void mostrarMenu() {
+        System.out.println("\n--- SISTEMA DE BIBLIOTECA ---");
+        System.out.println("1. Registrar libro");
+        System.out.println("2. Listar libros");
+        System.out.println("3. Buscar libro");
+        System.out.println("4. Registrar sede");
+        System.out.println("5. Listar sedes");
+        System.out.println("6. Salir");
+        System.out.print("Seleccione una opción: ");
     }
     //MENSAJE
     public void mostrarMensaje( String mensaje){
