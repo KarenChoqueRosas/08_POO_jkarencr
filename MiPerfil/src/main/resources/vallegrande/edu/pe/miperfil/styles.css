@@ -1,0 +1,70 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f4f7fb;
+}
+
+.contenedor {
+    -fx-background-color: white;
+}
+
+.titulo {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f4e79;
+    -fx-padding: 0 0 15px 0;
+}
+
+.label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #243447;
+}
+
+.text-field,
+.combo-box {
+    -fx-pref-height: 38px;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-border-color: #b8c4d1;
+    -fx-background-color: white;
+}
+
+.boton-principal {
+    -fx-background-color: #1687d9;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.boton-principal:hover {
+    -fx-background-color: #0f6fb5;
+}
+
+.boton-secundario {
+    -fx-background-color: #e4e9ef;
+    -fx-text-fill: #243447;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.boton-secundario:hover {
+    -fx-background-color: #ccd5df;
+}
+
+.mensaje-error {
+    -fx-text-fill: #c62828;
+    -fx-font-weight: bold;
+}
+
+.resultado {
+    -fx-background-color: #eaf5ff;
+    -fx-border-color: #9dcef2;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 15px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #17324d;
+}
