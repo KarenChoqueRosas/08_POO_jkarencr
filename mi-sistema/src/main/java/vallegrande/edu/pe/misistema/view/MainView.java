@@ -1,106 +1,65 @@
 package vallegrande.edu.pe.misistema.view;
 
-
 import java.util.List;
-
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 
 import vallegrande.edu.pe.misistema.model.Usuario;
 
-
 public class MainView extends BorderPane {
 
-
-    // Botones del menú
     private Button btnInicio;
     private Button btnUsuarios;
+    private final Button btnRegistrar = new Button("Registrar");
 
+    private final TextField txtNombre = new TextField();
+    private final TextField txtApellido = new TextField();
+    private final TextField txtCorreo = new TextField();
 
-    // Tabla donde mostraremos los usuarios
+    private final ComboBox<String> cboEstado = new ComboBox<>(
+            FXCollections.observableArrayList("Activo", "Inactivo")
+    );
+
     private TableView<Usuario> tablaUsuarios;
 
-
     public MainView() {
+        txtNombre.setPromptText("Nombre");
+        txtApellido.setPromptText("Apellido");
+        txtCorreo.setPromptText("Correo");
+        cboEstado.setValue("Activo");
 
-
-        // Creamos el menú
         crearMenu();
-
-
-        // Creamos la tabla
         crearTabla();
-
-
-        // Mostramos Inicio al abrir el sistema
         mostrarInicio();
     }
 
-
-    // Crea el menú lateral
     private void crearMenu() {
-
-
-        // Contenedor vertical para el menú
         VBox menu = new VBox(15);
-
-
-        // Espaciado interno
         menu.setPadding(new Insets(25));
-
-
-        // Ancho del menú
         menu.setPrefWidth(220);
+        menu.setStyle("-fx-background-color: #f8ca16;");
 
-
-        // Título del sistema
         Label titulo = new Label("MI SISTEMA");
-
-
         titulo.setStyle(
                 "-fx-font-size: 20px;" +
                         "-fx-font-weight: bold;" +
                         "-fx-text-fill: white;"
         );
 
-
-        // Creamos los botones
         btnInicio = crearBoton("Inicio");
-
-
         btnUsuarios = crearBoton("Usuarios");
 
-
-        // Agregamos los elementos al menú
-        menu.getChildren().addAll(
-                titulo,
-                btnInicio,
-                btnUsuarios
-        );
-
-
-        // Color del menú
-        menu.setStyle(
-                "-fx-background-color: #f8ca16;"
-        );
-
-
-        // Colocamos el menú a la izquierda
+        menu.getChildren().addAll(titulo, btnInicio, btnUsuarios);
         setLeft(menu);
     }
 
-
-    // Crea un botón del menú
     private Button crearBoton(String texto) {
         Button boton = new Button(texto);
         boton.setPrefWidth(170);
@@ -108,169 +67,116 @@ public class MainView extends BorderPane {
         return boton;
     }
 
-
-    // Muestra la pantalla de inicio
     public void mostrarInicio() {
-
-
-        // Contenedor del contenido
         VBox contenido = new VBox(10);
-
-
-        // Centramos el contenido
         contenido.setAlignment(Pos.CENTER);
 
-
-        // Título
         Label titulo = new Label("BIENVENIDO");
-
-
         titulo.setStyle(
-                "-fx-font-size: 28px;" +
-                        "-fx-font-weight: bold;"
+                "-fx-font-size: 28px; -fx-font-weight: bold;"
         );
 
+        Label texto = new Label("Sistema de gestión de usuarios");
 
-        // Texto de bienvenida
-        Label texto = new Label(
-                "Sistema de gestión de usuarios"
-        );
-
-
-        // Agregamos los elementos
-        contenido.getChildren().addAll(
-                titulo,
-                texto
-        );
-
-
-        // Mostramos el contenido en el centro
+        contenido.getChildren().addAll(titulo, texto);
         setCenter(contenido);
     }
 
-
-    // Muestra la pantalla de usuarios
     public void mostrarUsuarios() {
-
-
-        // Contenedor del contenido
-        VBox contenido = new VBox(20);
-
-
+        VBox contenido = new VBox(15);
         contenido.setPadding(new Insets(30));
 
-
-        // Título de la pantalla
         Label titulo = new Label("USUARIOS");
-
-
         titulo.setStyle(
-                "-fx-font-size: 26px;" +
-                        "-fx-font-weight: bold;"
+                "-fx-font-size: 26px; -fx-font-weight: bold;"
         );
 
+        HBox nombres = new HBox(10, txtNombre, txtApellido);
+        HBox contacto = new HBox(10, txtCorreo, cboEstado);
 
-        // Agregamos título y tabla
+        VBox formulario = new VBox(
+                10,
+                new Label("Registrar usuario"),
+                nombres,
+                contacto,
+                btnRegistrar
+        );
+
         contenido.getChildren().addAll(
                 titulo,
+                formulario,
                 tablaUsuarios
         );
 
-
-        // Mostramos el contenido en el centro
         setCenter(contenido);
     }
 
-
-    // Crea la tabla de usuarios
     private void crearTabla() {
-
-
-        // Creamos la tabla
         tablaUsuarios = new TableView<>();
 
-
-        // Creamos las columnas
         TableColumn<Usuario, Integer> colId =
                 new TableColumn<>("ID");
-
-
         TableColumn<Usuario, String> colNombre =
                 new TableColumn<>("Nombre");
-
-
         TableColumn<Usuario, String> colApellido =
                 new TableColumn<>("Apellido");
-
-
         TableColumn<Usuario, String> colCorreo =
                 new TableColumn<>("Correo");
-
-
         TableColumn<Usuario, String> colEstado =
                 new TableColumn<>("Estado");
 
-
-        // Indicamos qué atributo mostrará cada columna
         colId.setCellValueFactory(
                 new PropertyValueFactory<>("id")
         );
-
-
         colNombre.setCellValueFactory(
                 new PropertyValueFactory<>("nombre")
         );
-
-
         colApellido.setCellValueFactory(
                 new PropertyValueFactory<>("apellido")
         );
-
-
         colCorreo.setCellValueFactory(
                 new PropertyValueFactory<>("correo")
         );
-
-
         colEstado.setCellValueFactory(
                 new PropertyValueFactory<>("estado")
         );
 
-
-        // Agregamos las columnas a la tabla
         tablaUsuarios.getColumns().addAll(
-                colId,
-                colNombre,
-                colApellido,
-                colCorreo,
-                colEstado
+                colId, colNombre, colApellido, colCorreo, colEstado
         );
     }
 
-
-    // Recibe los usuarios y los muestra en la tabla
     public void mostrarDatosUsuarios(List<Usuario> usuarios) {
-
-
-        // Convertimos la lista a una colección observable
         tablaUsuarios.setItems(
                 FXCollections.observableArrayList(usuarios)
         );
     }
 
-
-    // Permite que el Controller acceda al botón Inicio
     public Button getBtnInicio() {
-
-
         return btnInicio;
     }
 
-
-    // Permite que el Controller acceda al botón Usuarios
     public Button getBtnUsuarios() {
-
-
         return btnUsuarios;
+    }
+
+    public Button getBtnRegistrar() {
+        return btnRegistrar;
+    }
+
+    public String getNombre() {
+        return txtNombre.getText().trim();
+    }
+
+    public String getApellido() {
+        return txtApellido.getText().trim();
+    }
+
+    public String getCorreo() {
+        return txtCorreo.getText().trim();
+    }
+
+    public String getEstado() {
+        return cboEstado.getValue();
     }
 }
